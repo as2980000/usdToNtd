@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.usdToNtd.vo.User;
+import com.example.usdToNtd.vo.Raw;
 import  com.example.usdToNtd.vo.UserRepository;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -40,12 +41,18 @@ public class UserServiceImplementation implements UserService{
            System.out.println(jsonStr);
 
            Gson  gson=new Gson();
-           Type userListType =new TypeToken<ArrayList<User>>(){}.getType();
+          // Type userListType =new TypeToken<ArrayList<Raw>>(){}.getType();
 
-            User[] userArray=gson.fromJson(jsonStr, User[].class);
+         Raw[] userArray=gson.fromJson(jsonStr, Raw[].class);
   
-           for(User u :userArray){
-                System.out.println(u.getId());
+           for(Raw r :userArray){
+                System.out.println(r.getUsdNtd());
+
+                User u2=new User();
+              // user
+              u2.setDate(r.getDate());
+              u2.setUsdToNtd(r.getUsdNtd());
+              userRepository.save(u2);
            }
 
 
