@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <script>
+        $( document ).ready(function() {
+            console.log( "ready!" );
+
+            $( "#btn1" ).on( "click", function( event ) {
+                $.ajax({
+                url:"testPost" , 
+                type:"POST" ,  
+                contentType: "application/json;charset=utf-8",           
+                data: JSON.stringify({"startDate":"20240920","endDate":"20240921","currency":"usd"}),
+                success:function (data) {
+                    alert(data);
+                },
+                error:function () {
+                    alert("fail")
+                },
+                //dataType:"json"
+            });
+            });
+        });
+    </script>
+</head>
+<body>
+
+    <button id="btn1" class="continue" type="button">click</button>
+    
+</body>
+</html>
