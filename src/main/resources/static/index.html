@@ -12,12 +12,14 @@
 
             $( "#btn1" ).on( "click", function( event ) {
                 $.ajax({
-                url:"testPost" , 
+                url:"queryExchangeRate" , 
                 type:"POST" ,  
                 contentType: "application/json;charset=utf-8",           
                 data: JSON.stringify({"startDate":"20240920","endDate":"20240921","currency":"usd"}),
                 success:function (data) {
-                    alert(data);
+
+                    alert(JSON.stringify(data));
+                    console.log(data);
                 },
                 error:function () {
                     alert("fail")

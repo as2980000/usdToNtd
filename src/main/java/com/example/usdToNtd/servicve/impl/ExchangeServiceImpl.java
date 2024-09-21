@@ -3,14 +3,15 @@ package com.example.usdToNtd.servicve.impl;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.usdToNtd.servicve.ExchangeService;
+import com.example.usdToNtd.vo.ExchangeData;
 import com.example.usdToNtd.vo.ExchangeDataRepository;
 import com.example.usdToNtd.vo.Raw;
-import com.example.usdToNtd.vo.User;
 import com.google.gson.Gson;
 
 @Service
@@ -43,11 +44,11 @@ public class ExchangeServiceImpl  implements  ExchangeService{
 
             for (Raw r : userArray) {
                 System.out.println(r.getUsdNtd());
-                User u2 = new User();
+                ExchangeData ex2 = new ExchangeData();
                 // user
-                u2.setDate(r.getDate());
-                u2.setUsdToNtd(r.getUsdNtd());
-                //userRepository.save(u2);
+                ex2.setDate(r.getDate());
+                ex2.setUsdToNtd(r.getUsdNtd());
+                exchangeDataRepository.save(ex2);
                 
             }
 
@@ -61,9 +62,24 @@ public class ExchangeServiceImpl  implements  ExchangeService{
     }
 
     @Override
-    public void queryExchange() throws Exception{
+    public List<ExchangeData> queryExchange() throws Exception{
        
         //throw new UnsupportedOperationException("Unimplemented method 'queryExchange'");
+
+        return null;
+    }
+
+    @Override
+    public List<ExchangeData> getAllData() throws Exception {
+     
+        List<ExchangeData> dataList=exchangeDataRepository.findAll();
+
+        if(dataList!=null){
+
+            return dataList;
+        }
+        throw new UnsupportedOperationException("Fail to get exchange data");
+
     }
     
 }

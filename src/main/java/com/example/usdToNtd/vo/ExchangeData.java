@@ -4,7 +4,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 
-@Document(collection = "exchange")
+@Document(collection = "exchange3")
 public class ExchangeData {
     @Id
     private String id;
