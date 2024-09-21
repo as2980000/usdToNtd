@@ -3,6 +3,7 @@ package com.example.usdToNtd.servicve;
 import java.util.List;
 
 import com.example.usdToNtd.vo.ExchangeData;
+import com.example.usdToNtd.vo.UserReq;
 
 public interface ExchangeService {
     
@@ -10,7 +11,7 @@ public interface ExchangeService {
     public void syncExchange() throws Exception;
     
     /*取出日期區間內美元/台幣的歷史資料*/
-    public List<ExchangeData> queryExchange() throws Exception;
+    public List<ExchangeData> queryExchange(UserReq userReq) throws Exception;
 
     public List<ExchangeData> getAllData()  throws Exception;
 }

@@ -6,12 +6,16 @@ import java.net.URL;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import com.example.usdToNtd.servicve.ExchangeService;
 import com.example.usdToNtd.vo.ExchangeData;
 import com.example.usdToNtd.vo.ExchangeDataRepository;
 import com.example.usdToNtd.vo.Raw;
+import com.example.usdToNtd.vo.UserReq;
 import com.google.gson.Gson;
 
 @Service
@@ -20,6 +24,9 @@ public class ExchangeServiceImpl  implements  ExchangeService{
     @Autowired
     private ExchangeDataRepository exchangeDataRepository;
     
+    @Autowired
+    MongoTemplate mongoTemplate;
+
     @Override
     public void syncExchange() throws Exception {
 
@@ -62,11 +69,15 @@ public class ExchangeServiceImpl  implements  ExchangeService{
     }
 
     @Override
-    public List<ExchangeData> queryExchange() throws Exception{
+    public List<ExchangeData> queryExchange(UserReq userReq) throws Exception{
        
         //throw new UnsupportedOperationException("Unimplemented method 'queryExchange'");
-
-        return null;
+        Query query = new Query();
+        //query.addCriteria(Criteria.where("name").regex("^A"));
+        
+        query.addCriteria(Criteria.where("Date").gte(userReq.getStartDate()).lte(userReq.getEndDate()) );
+        List<ExchangeData> exchangeList = mongoTemplate.find(query,ExchangeData.class);
+        return exchangeList;
     }
 
     @Override

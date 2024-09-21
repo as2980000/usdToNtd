@@ -1,20 +1,15 @@
 package com.example.usdToNtd.vo;
 
 import java.util.List;
+import java.util.Map;
 
 
 public class QueryResult {
     
     Message error;
-    List<ExchangeData> currency;
+   // List<ExchangeData> dataList;
+    List<Map<String,Object>> currency;
 
-    public List<ExchangeData> getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(List<ExchangeData> currency) {
-        this.currency = currency;
-    }
 
     public Message getError() {
         return error;
@@ -22,6 +17,15 @@ public class QueryResult {
 
     public void setError(Message error) {
         this.error = error;
+    }
+
+
+    public List<Map<String, Object>> getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(List<Map<String, Object>> currency) {
+        this.currency = currency;
     }
 
 
